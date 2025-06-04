@@ -1,6 +1,7 @@
 import React from 'react'
 import { assets, features } from '../assets/assets'
 
+
 const BottomBanner = () => {
   return (
     <div className='relative mt-24'>

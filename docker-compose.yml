@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    image: ayishafarhath/grocery:latest
+    container_name: grocery-backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./server/.env
+    networks:
+      - app-network
+# Ensure your backend app listens on 0.0.0.0:4000 inside container
+
+  frontend:
+    image: ayishafarhath/grocery-frontend:latest
+    container_name: grocery-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_BACKEND_URL=http://grocery-backend:4000
+      - VITE_CURRENCY=$
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
