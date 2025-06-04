@@ -2,17 +2,25 @@ version: '3.8'
 
 services:
   backend:
+    environment:
+      - MONGO_URI=mongodb+srv://greencart:Leopards!23@cluster0.worgivt.mongodb.net/greencart?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=secret#text
+      - NODE_ENV=development
+      - SELLER_EMAIL=admin@example.com
+      - SELLER_PASSWORD=greatstack123
+      - CLOUDINARY_CLOUD_NAME=ddyb4qnxx
+      - CLOUDINARY_API_KEY=241669779641148
+      - CLOUDINARY_API_SECRET=WzNmf3VQPZJTePhBt1WJlXgucFw
+      - STRIPE_PUBLISHABLE_KEY=pk_test_51RVnytPFRxuzBZ6kwZngYIJvEe45QwyAcuNWqhYqIYac8kz73KOdaGh2lc9omWyPOXLLhbakII75QJD1QDTk9HG200s3GY9sfS
+      - STRIPE_WEBHOOK_SECRET=----------
     build: ./server
     image: ayishafarhath/grocery:latest
     container_name: grocery-backend
     restart: unless-stopped
     ports:
       - "4000:4000"
-    env_file:
-      - ./server/.env
     networks:
       - app-network
-# Ensure your backend app listens on 0.0.0.0:4000 inside container
 
   frontend:
     image: ayishafarhath/grocery-frontend:latest
