@@ -1,23 +1,21 @@
-# Stage 1: Build the app
+# Stage 1: Build the Vite app
 FROM node:18 AS build
 
 WORKDIR /app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY . ./
+COPY . .
 RUN npm run build
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy Vite output from 'dist' instead of 'build'
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Optional: Copy custom nginx config
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+# Expose the default Nginx port
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
