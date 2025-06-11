@@ -21,7 +21,7 @@ await connectDB();
 await connectCloudinary();
 
 // List allowed origins exactly — update this to your frontend URL(s)
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000','https://grocery-76nq.vercel.app/'];
 
 app.use(cors({
   origin: function (origin, callback) {
