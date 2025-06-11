@@ -20,45 +20,38 @@ const port = process.env.PORT || 4000;
 await connectDB();
 await connectCloudinary();
 
-// ✅ List allowed origins — EXACT, no slash at end
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://grocery-76nq.vercel.app'
-];
-
-// ✅ CORS middleware
+// List allowed origins exactly — update this to your frontend URL(s)
+const allowedOrigins = ['http://localhost:3000','https://grocery-76nq.vercel.app/'];
+//dskndsknvkjdvkbdfkbvkfxbvkfbvkdfkvbskdbv
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // Allow Postman/curl
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(
-        new Error(`The CORS policy does not allow origin: ${origin}`),
-        false
-      );
+    // Allow requests with no origin like Postman or curl
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
+      return callback(new Error(msg), false);
     }
+    return callback(null, true);
   },
-  credentials: true
+  credentials: true,  // IMPORTANT for cookies/auth
 }));
 
-// ✅ Handle preflight (OPTIONS) requests globally
+// Handle preflight requests globally
 app.options('*', cors({
   origin: allowedOrigins,
   credentials: true,
 }));
 
-// ✅ Stripe raw body must come before JSON
+// Stripe webhook needs raw body before JSON parser
 app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks);
 
-// ✅ Middleware order
+// Middleware order: cookieParser then express.json
 app.use(cookieParser());
 app.use(express.json());
 
-// ✅ Test route
+// Routes
 app.get('/', (req, res) => res.send("API is Working"));
 
-// ✅ Routes
 app.use('/api/user', userRouter);
 app.use('/api/seller', sellerRouter);
 app.use('/api/product', productRouter);
@@ -66,7 +59,6 @@ app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
 
-// ✅ Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
