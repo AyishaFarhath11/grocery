@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-     "lint": "eslint . --quiet || true",
+     "lint": "eslint . --quiet || exit 0",
     "test": "jest --coverage"
   },
   "dependencies": {
