@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
-import axios from '../api/axiosInstance'; // adjust relative path as needed
 
 
 // Input Field Component
