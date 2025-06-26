@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "nyc --reporter=lcov --reporter=text npm test"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.16",
