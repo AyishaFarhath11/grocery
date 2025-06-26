@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "lint": "eslint .",
-    "test": "nyc --reporter=lcov --reporter=text npm test"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.16",
