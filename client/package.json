@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0"
+    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "test": "echo \"No tests defined yet\" && exit 0"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.16",
